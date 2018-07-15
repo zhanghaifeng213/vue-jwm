@@ -1,23 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <transition :name="transitionName">
+      <keep-alive include="index">
+        <router-view class="child-view"></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+  data() {
+    return {
+      transitionName: "fade"
+    };
+  },
+  watch: {}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* @import "@/common/style/index.scss"; */
+.child-view {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
+
